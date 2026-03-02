@@ -5,19 +5,18 @@ $message = "";
 
 if (isset($_POST['save'])) {
 
-  $IdNumber = $_POST['IdNumber'] ?? '';
-  $full_name = $_POST['Name'] ?? '';
-  $email = $_POST['Email'] ?? '';
-  $Course = $_POST['Course'] ?? '';
+  $id_number = $_POST['id_number'] ?? '';
+  $name = $_POST['name'] ?? '';
+  $email = $_POST['email'] ?? '';
+  $course = $_POST['course'] ?? '';
 
-  if ($full_name == "" || $email == "") {
+  if ($name == "" || $email == "") {
     $message = "Name and Email are required!";
   } else {
-
-    $sql = "INSERT INTO student (IdNumber, Name, Email, Course)
-            VALUES ('$IdNumber', '$full_name', '$email', '$Course')";
+    $sql = "INSERT INTO student (id_number, name, email, course)
+            VALUES ('$id_number', '$name', '$email', '$course')";
     mysqli_query($conn, $sql);
-    header("Location: list_students.php");
+    header("Location: student_list.php");
     exit;
   }
 }
@@ -28,6 +27,7 @@ if (isset($_POST['save'])) {
 <head>
 <meta charset="utf-8">
 <title>Add Student</title>
+    <link rel="stylesheet" href="/assessment_beginner/style.css">
 </head>
 
 <body>
@@ -39,20 +39,20 @@ if (isset($_POST['save'])) {
 <form method="post" id="student-form">
 
   <label class="form-label">Full Name*</label><br>
-  <input type="text" name="Name" class="form-input"><br><br>
+  <input type="text" name="name" class="form-input"><br><br>
 
   <label class="form-label">Email*</label><br>
-  <input type="text" name="Email" class="form-input"><br><br>
+  <input type="text" name="email" class="form-input"><br><br>
 
   <label class="form-label">Course</label><br>
-  <input type="text" name="Course" class="form-input"><br><br>
+  <input type="text" name="course" class="form-input"><br><br>
 
   <label class="form-label">Id Number</label><br>
-  <input type="text" name="IdNumber" class="form-input"><br><br>
+  <input type="text" name="id_number" class="form-input"><br><br>
 
   <div class="form-actions">
     <button type="button" id="cancel-btn"
-      onclick="window.location.href='list_students.php'">
+      onclick="window.location.href='student_list.php'">
       Cancel
     </button>
 
